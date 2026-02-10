@@ -1,16 +1,47 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: GPL-3.0
 
-use app::YourApp;
-/// The `app` module is used by convention to indicate the main component of our application.
 mod app;
-mod core;
+mod config;
+mod footer;
+mod i18n;
+mod image_store;
+mod key_bind;
+mod library;
+mod menu;
+mod mpris;
+mod page;
+mod player;
+mod playlist;
 
-/// The `cosmic::app::run()` function is the starting point of your application.
-/// It takes two arguments:
-/// - `settings` is a structure that contains everything relevant with your app's configuration, such as antialiasing, themes, icons, etc...
-/// - `()` is the flags that your app needs to use before it starts.
-///  If your app does not need any flags, you can pass in `()`.
+use app::Flags;
+use config::{Config, State};
+use cosmic::{
+    app::Settings,
+    iced::{Limits, Size},
+};
+
 fn main() -> cosmic::iced::Result {
-    let settings = cosmic::app::Settings::default();
-    cosmic::app::run::<YourApp>(settings, ())
+    // Get the system's preferred languages.
+    let requested_languages = i18n_embed::DesktopLanguageRequester::requested_languages();
+
+    // Enable localizations to be applied.
+    i18n::init(&requested_languages);
+
+    let (config_handler, config) = Config::load();
+    let (state_handler, state) = State::load();
+
+    // Settings for configuring the application window and iced runtime.
+    let mut settings: Settings = Settings::default();
+    settings = settings.size_limits(Limits::NONE.min_width(360.0).min_height(180.0));
+    settings = settings.theme(config.app_theme.theme());
+    settings = settings.size(Size::new(state.window_width, state.window_height));
+
+    let flags = Flags {
+        config_handler,
+        state_handler,
+        state,
+    };
+
+    // Starts the application's event loop with `()` as the application's flags.
+    cosmic::app::run::<app::AppModel>(settings, flags)
 }
