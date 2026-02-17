@@ -43,6 +43,6 @@ repeat-all = Повторювати
 add-now-playing-to = Додати поточний запис до
 select-all = Виділити все
 
-previous = Попередній
+previous = Назад
 play = Відтворити
-next = Наступний
+next = Далі
