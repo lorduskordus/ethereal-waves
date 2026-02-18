@@ -164,9 +164,15 @@ impl fmt::Debug for Playlist {
     }
 }
 
+fn random_entry_id() -> u32 {
+    rand::random()
+}
+
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(default)]
 pub struct Track {
+    #[serde(default = "random_entry_id")]
+    pub entry_id: u32,
     pub path: PathBuf,
     #[serde(skip)]
     pub selected: bool,
@@ -177,6 +183,7 @@ pub struct Track {
 impl Default for Track {
     fn default() -> Self {
         Self {
+            entry_id: rand::random(),
             path: PathBuf::new(),
             selected: false,
             metadata: MediaMetaData::new(),
@@ -188,10 +195,19 @@ impl Default for Track {
 impl Track {
     pub fn new() -> Self {
         Self {
+            entry_id: rand::random(),
             path: PathBuf::new(),
             selected: false,
             metadata: MediaMetaData::new(),
             date_added: Local::now().to_string(),
         }
+    }
+
+    pub fn generate_entry_id(&mut self) {
+        self.entry_id = random_entry_id();
+    }
+
+    pub fn update_date_added(&mut self) {
+        self.date_added = Local::now().to_string();
     }
 }

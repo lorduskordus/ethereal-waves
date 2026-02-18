@@ -15,6 +15,7 @@ use url::Url;
 pub enum PlaybackEvent {
     TrackEnded,
     Error(String),
+    #[allow(dead_code)]
     PositionUpdate(f32),
 }
 
@@ -113,7 +114,7 @@ impl PlaybackService {
                     .position(|t| {
                         t.metadata.id.clone().unwrap_or_default()
                             == clicked.metadata.id.clone().unwrap_or_default()
-                            && t.date_added == clicked.date_added
+                            && t.entry_id == clicked.entry_id
                     })
                     .unwrap_or(0)
             } else {
