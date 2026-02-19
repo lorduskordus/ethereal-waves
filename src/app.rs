@@ -64,6 +64,7 @@ const APP_ICON: &[u8] = include_bytes!(
 );
 
 pub type PlaylistId = u32;
+pub type TrackId = String;
 
 /// The application model stores app-specific state used to describe its interface and
 /// drive its logic.
@@ -1154,6 +1155,11 @@ impl cosmic::Application for AppModel {
                             self.playback_service
                                 .next(self.state.repeat_mode.clone(), self.state.repeat);
                         }
+                        PlaybackEvent::GaplessTrackAdvanced => {
+                            // Session index updates inside playback_service.tick()
+                            // Just update MPRIS
+                            self.update_mpris();
+                        }
                         PlaybackEvent::Error(err) => {
                             eprintln!("Playback error: {}", err);
                             self.playback_service
@@ -1221,6 +1227,9 @@ impl cosmic::Application for AppModel {
                             // update session shuffle as in ToggleShuffle handler
                         }
                     }
+
+                    self.playback_service
+                        .set_repeat_state(self.state.repeat_mode.clone(), self.state.repeat);
                 }
 
                 self.update_mpris();
@@ -1272,6 +1281,9 @@ impl cosmic::Application for AppModel {
             Message::ToggleRepeat => {
                 let repeat = !self.state.repeat;
                 state_set!(repeat, repeat);
+                // Update playback service state (for gapless playback)
+                self.playback_service
+                    .set_repeat_state(self.state.repeat_mode.clone(), self.state.repeat);
             }
 
             Message::ToggleRepeatMode => {
@@ -1282,6 +1294,8 @@ impl cosmic::Application for AppModel {
                 };
 
                 state_set!(repeat_mode, repeat_mode);
+                self.playback_service
+                    .set_repeat_state(self.state.repeat_mode.clone(), self.state.repeat);
             }
 
             Message::ToggleShuffle => {

@@ -1,10 +1,10 @@
 [package]
 name = "ethereal-waves"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 license = "GPL-3.0"
 description = "Ethereal Waves"
-repository = "https://github.com/LotusPetal392/ethereal-waves"
+repository = "https://github.com/cosmic-utils/ethereal-waves"
 
 [dependencies]
 anyhow = "1.0.100"

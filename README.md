@@ -15,18 +15,18 @@ A basic music player based on libcosmic. It's still very much a work in progress
 
 ## Planned Features
 Non-exhaustive list of planned features in no particular order:
-- Gapless playback
-- Grid view
-- More column options in list view
-- Export playlist as .m3u
-- Improved MPRIS support
-- Sorting options
-- Shuffle modes
-- Condensed responsive layout
-- More keyboard shortcuts
-- Drag and drop support
-- Playlist duplicate management
-- Partial update (Only add new tracks)
+- [x] Gapless playback
+- [ ] Grid view
+- [ ] More column options in list view
+- [ ] Export playlist as .m3u
+- [ ] Improved MPRIS support (much improved but not entirely complete)
+- [ ] Sorting options
+- [ ] Shuffle modes
+- [ ] Condensed responsive layout
+- [ ] More keyboard shortcuts
+- [ ] Drag and drop support
+- [ ] Playlist duplicate management
+- [ ] Partial update (Only add new tracks)
 
 ## Keybindings
 - `Ctrl + U`: Update Library
@@ -52,5 +52,10 @@ just run-dev
 
 To install:
 ```
-just install
+sudo apt install just
+```
+
+```
+just build-release
+sudo just install
 ```
