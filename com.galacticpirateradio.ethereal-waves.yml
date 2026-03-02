@@ -44,6 +44,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/cosmic-utils/ethereal-waves.git
-        commit: 1ea8a8dfc89b43b38ef4abaa8529cba7fed05b84
+        commit: 3e6b7f225202ae3be6a52527bfd3f749083dabbf
 
       - cargo-sources.json

@@ -30,11 +30,11 @@
     <screenshots>
         <screenshot type="default">
             <caption>Light mode</caption>
-            <image>https://raw.githubusercontent.com/cosmic-utils/ethereal-waves/b970a4506b73b681b760d581c70f30d3a7eeed4b/screenshots/Ethereal%20Waves%20-%20Light%20Mode.png</image>
+            <image>https://raw.githubusercontent.com/cosmic-utils/ethereal-waves/main/screenshots/Ethereal%20Waves%20-%20Light%20Mode.png</image>
         </screenshot>
         <screenshot>
             <caption>Dark mode</caption>
-            <image>https://raw.githubusercontent.com/cosmic-utils/ethereal-waves/b970a4506b73b681b760d581c70f30d3a7eeed4b/screenshots/Ethereal%20Waves%20-%20Dark%20Mode.png</image>
+            <image>https://raw.githubusercontent.com/cosmic-utils/ethereal-waves/main/screenshots/Ethereal%20Waves%20-%20Dark%20Mode.png</image>
         </screenshot>
     </screenshots>
     <launchable type="desktop-id">com.galacticpirateradio.ethereal-waves.desktop</launchable>
